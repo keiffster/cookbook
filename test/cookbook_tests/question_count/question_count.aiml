@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+	<category>
+		<pattern>RESET ASK QUESTION</pattern>
+		<template>
+			<think><set name="ask_count">unknown</set></think>
+			Count reset
+		</template>
+	</category>
+
+	<category>
+		<pattern>ASK QUESTION</pattern>
+		<template>
+			<think><get name="ask_count" /></think>
+			<condition name="ask_count">
+				<li value="unknown" >
+					First time
+					<think><set name="ask_count">1</set></think>
+				</li>
+				<li>
+					<think>
+						<set name="ask_count">
+							<map name="successor"><get name="ask_count" /></map>
+						</set>
+					</think>
+					You have asked this question <get name="ask_count" /> times.
+				</li>
+			</condition>
+		</template>
+	</category>
+
+</aiml>

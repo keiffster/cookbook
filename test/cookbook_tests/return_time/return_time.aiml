@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+	<category>
+		<pattern>RETURN TIME</pattern>
+		<template>
+			<condition name="asktime">
+				<li value="unknown">
+					<think>
+						<set name="asktime">
+							<date format="%I:%M:%S %p" jformat="h:mm:ss a"/>
+						</set>
+					</think>
+					First time you asked this question
+				</li>
+				<li>
+					<think>
+						<set name="newtime">
+							<date format="%I:%M:%S %p" jformat="h:mm:ss a"/>
+						</set>
+					</think>
+					You asked this question
+					<interval format="%I:%M:%S %p" jformat="h:mm:ss a">
+						<style>seconds</style>
+						<from>
+							<get name="asktime"/>
+						</from>
+						<to>
+							<get name="newtime" />
+						</to>
+					</interval>
+					seconds before.
+				</li>
+			</condition>
+		</template>
+	</category>
+
+</aiml>
